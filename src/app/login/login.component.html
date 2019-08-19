@@ -1,0 +1,14 @@
+<div style="text-align: center;">
+    <form [formGroup]="form" style="margin-top: 20%">
+        <div>
+            <mat-form-field>
+                <input formControlName="token" matInput placeholder="Insert token" type="password">
+                <mat-error>Este campo é obrigatório</mat-error>
+            </mat-form-field>
+            <div class="button-row">
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="onSubmit()">Enviar</button>
+            </div>
+
+        </div>
+    </form>
+</div>

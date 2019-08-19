@@ -1,0 +1,45 @@
+<mat-toolbar>
+    <span>{{service.form.controls['_id'].value?"Atualizar notícia":"Nova notícia"}}</span>
+    <span class="fill-remaining-space"></span>
+    <button mat-raised-button type="submit" (click)="onClose()" tabindex="-1" style="float: right"><mat-icon>clear</mat-icon>Fechar</button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" class="normal-form" (submit) = "onSubmit()">
+    <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="controles-container">
+                <input type="hidden" formControlName="_id">
+                <mat-form-field>
+                    <input formControlName="linkImg" matInput placeholder="Link da imagem">
+                    <mat-error>Este campo é obrigatório</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="title" matInput placeholder="Título">
+                    <mat-error>Este campo é obrigatório</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="description" matInput placeholder="Descrição">
+                    <mat-error>Este campo é obrigatório</mat-error>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="controles-container">
+                <mat-form-field>
+                    <mat-select formControlName="theme" placeholder="Tema">
+                        <ng-container *ngFor="let theme of themes">
+                            <mat-option value="{{theme.id}}">{{theme.value}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="link" matInput placeholder="Link da notícia">
+                    <mat-error>Este campo é obrigatório</mat-error>
+                </mat-form-field>
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Enviar</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

@@ -1,0 +1,53 @@
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="listData" >
+        <ng-container matColumnDef="linkImg">
+            <mat-header-cell *matHeaderCellDef>Link Img</mat-header-cell>
+            <mat-cell *matCellDef="let article"><a href="{{article.linkImg}}">{{article.linkImg}}</a></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Título</mat-header-cell>
+            <mat-cell *matCellDef="let article">{{article.title}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+            <mat-cell *matCellDef="let article">{{article.description}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="theme">
+            <mat-header-cell *matHeaderCellDef>Tema</mat-header-cell>
+            <mat-cell *matCellDef="let article">{{article.theme}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="link">
+            <mat-header-cell *matHeaderCellDef>Link da notícia</mat-header-cell>
+            <mat-cell *matCellDef="let article"><a href="{{article.link}}">{{article.link}}</a></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="onEdit(row)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDelete(row)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                Carregando dados...
+            </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                    Nenhuma notícia cadastrada
+                </mat-footer-cell>
+            </ng-container>
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" [pageSize]="5"></mat-paginator>
+</div>
+<div style="padding-top: 15px;">
+    <button mat-raised-button color="primary" style="float: right;" (click) = onCreate()><mat-icon>add</mat-icon>Criar</button>
+</div>
