@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material'
 })
 export class ArticleComponent implements OnInit {
 
-  constructor(private service : DataService, private notification : NotificationService, public dialogRef : MatDialogRef<ArticleComponent>) { }
+  constructor(public service : DataService, private notification : NotificationService, public dialogRef : MatDialogRef<ArticleComponent>) { }
 
   themes = [
     {id: "Política", value : "Política"},
