@@ -19,13 +19,7 @@ export class NewsListComponent implements OnInit {
   constructor(private service: DataService, private dialog : MatDialog) { }
 
   ngOnInit() {
-    this.service.getNews().subscribe(
-      data => {
-        this.articles$ = data
-        this.listData = new MatTableDataSource(this.articles$)
-        this.listData.paginator = this.paginator
-      }
-    )
+    this.update()
   }
 
   onCreate(){
@@ -34,8 +28,9 @@ export class NewsListComponent implements OnInit {
     dialogConfig.disableClose = true
     dialogConfig.autoFocus = true
     dialogConfig.width = "60%"
-    this.dialog.open(ArticleComponent, dialogConfig)
-    this.ngOnInit()
+    this.dialog.open(ArticleComponent, dialogConfig).afterClosed().subscribe(
+      success => this.update()
+    )
   }
 
   onEdit(item){
@@ -44,14 +39,28 @@ export class NewsListComponent implements OnInit {
     dialogConfig.disableClose = true
     dialogConfig.autoFocus = true
     dialogConfig.width = "60%"
-    this.dialog.open(ArticleComponent, dialogConfig)
-    this.ngOnInit()
+    this.dialog.open(ArticleComponent, dialogConfig).afterClosed().subscribe(
+      success => this.update()
+    )
   }
 
   onDelete(item){
     console.log(item)
-    this.service.delete(item._id)
-    this.ngOnInit()
+    this.service.delete(item._id).subscribe(
+      success => console.log('Sucess on delete'),
+      error => console.log('Error on delete')
+    )
+    this.update()
+  }
+
+  update(){
+    this.service.getNews().subscribe(
+      data => {
+        this.articles$ = data
+        this.listData = new MatTableDataSource(this.articles$)
+        this.listData.paginator = this.paginator
+      }
+    )
   }
 
 }

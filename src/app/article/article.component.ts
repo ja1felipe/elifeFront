@@ -31,7 +31,9 @@ export class ArticleComponent implements OnInit {
         )
       } else {
         this.service.create(this.service.form.value).subscribe(
-          success => this.notification.success('Notícia criada com sucesso'),
+          success => {
+            this.notification.success('Notícia criada com sucesso')
+          },
           error => console.log(error)
         )
       }

@@ -16,7 +16,7 @@ export class DataService {
   })
 
   header = new HttpHeaders({
-    "Authorization" : 'Bearer ' + localStorage.getItem('token')
+    "Authorization" : 'Bearer ' + sessionStorage.getItem('token')
   })
   
   constructor(private http: HttpClient) { 
@@ -46,29 +46,29 @@ populate(info){
 }
 
    getNews(){
-    return this.http.get('http://localhost:3000/controller/list', {headers : this.header})
+    return this.http.get(`https://elife-backend.herokuapp.com/news`, {headers : this.header})
   }
 
   create(news){
-    return this.http.post('http://localhost:3000/controller/register', news, {headers : this.header})
+    return this.http.post(`https://elife-backend.herokuapp.com/news`, news, {headers : this.header})
   }
 
   delete(id){
     console.log(id)
-    return this.http.delete(`http://localhost:3000/controller/delete/${id}`, {headers : this.header})
+    return this.http.delete(`https://elife-backend.herokuapp.com/news/${id}`, {headers : this.header})
   }
 
   loadById(id){
-    return this.http.get(`http://localhost:3000/controller/list/${id}`, {headers : this.header})
+    return this.http.get(`https://elife-backend.herokuapp.com/news/${id}`, {headers : this.header})
   }
 
   update(news){
     console.log(news)
-    return this.http.put(`http://localhost:3000/controller/edit/${news._id}`, news, {headers : this.header})
+    return this.http.put(`https://elife-backend.herokuapp.com/news/${news._id}`, news, {headers : this.header})
   }
 
    login(password){
-    return this.http.post('http://localhost:3000/controller/auth', {admin : "admin", password})
+    return this.http.post(`https://elife-backend.herokuapp.com/news/auth`, {admin : "admin", password})
    }
 
 }

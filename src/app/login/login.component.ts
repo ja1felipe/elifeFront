@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private date: DataService) { }
 
   ngOnInit() {
-    if(localStorage.getItem('token')){
+    if(sessionStorage.getItem('token')){
       window.location.assign('news')
     }
     this.form = this.fb.group({
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.date.login(this.form.value.token).subscribe(
       success => {
         this.token = success
-        localStorage.setItem('token', this.token.token)
+        sessionStorage.setItem('token', this.token.token)
         window.location.assign('news')
       },
       error => {

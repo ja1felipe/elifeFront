@@ -10,13 +10,13 @@ export class NewsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if(!localStorage.getItem('token')){
+    if(!sessionStorage.getItem('token')){
       window.location.assign('/')
     }
   }
 
 onLogout(){
-  localStorage.removeItem('token')
+  sessionStorage.removeItem('token')
   document.location.assign('/')
 }
 
